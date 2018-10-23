@@ -38,28 +38,38 @@
         </style>
     </head>
 <body>
+    <span id = "fpsLabel" style="position: absolute;right: 20px;top: 20px;color: #999;cursor: default;">0 fps</span>
     <canvas id="renderCanvas"></canvas>
-    <span id = "fpsLabel">0 fps</span>
+    
     <script>
+        //Globals
         //UI
         var fpsLabel = document.getElementById("fpsLabel");
         //UI*
+        //3D
         var canvas = document.getElementById("renderCanvas");
-        var delayCreateScene = function () {
-        
-            // Model by Mixamo
-        
+        var engine;
+        var scene;
+        //3D*
+        //Globals*
+
+        function setUpEngine() {
+            engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
             engine.enableOfflineSupport = false;
-            
             // This is really important to tell Babylon.js to use decomposeLerp and matrix interpolation
             BABYLON.Animation.AllowMatricesInterpolation = true;
-        
+            //BABYLON.Animation.AllowMatrixDecomposeForInterpolation = false;
+        }
+
+
+
+        var delayCreateScene = function () {
+            setUpEngine();
             var scene = new BABYLON.Scene(engine);
-        
-            var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 3, new BABYLON.Vector3(0, 1, 0), scene);
+            //Setting up scene
+            var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2.4, 3, new BABYLON.Vector3(0, 1, 0), scene);
             camera.attachControl(canvas, true);
-        
-            camera.lowerRadiusLimit = 2;
+            camera.lowerRadiusLimit = 4;
             camera.upperRadiusLimit = 10;
             camera.wheelDeltaPercentage = 0.01;
         
@@ -74,7 +84,9 @@
             var shadowGenerator = new BABYLON.ShadowGenerator(1024, light2);
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
-        	
+        	//Setting up scene
+            engine.loadingScreen.loadingUIText = "MedicalBot is being summoned";
+            engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
         
         	BABYLON.SceneLoader.ImportMesh("", "./scenes/", "dummy3.babylon", scene, function (newMeshes, particleSystems, skeletons) {
@@ -195,12 +207,9 @@
             return scene;
         };
         
-        
-        var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
-        var scene = delayCreateScene();
+        scene = delayCreateScene();
         // Add WebVR button 
         var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
-
         engine.runRenderLoop(function () {
             if (scene) {
                 scene.render();
@@ -212,6 +221,7 @@
         window.addEventListener("resize", function () {
             engine.resize();
         });
+        // Resize*
     </script>
 </body>
 </html>
