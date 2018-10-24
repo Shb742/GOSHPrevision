@@ -62,11 +62,6 @@
         var robotSkeleton;
         var robotMesh;
         //3D*
-        //Audio Files
-        var demo1;
-        var demo2;
-        var demo3;
-        //Audio Files*
         //Globals*
 
         //UI
@@ -157,9 +152,9 @@
                 helper.setMainColor(BABYLON.Color3.Gray());
                 helper.ground.position.y += 0.01;*/
                 //Background*
-
+                loadSpeech();
+                setUpDemos();
                 setUpUI();
-                loadSpeach();
                 engine.hideLoadingUI();
             });
             return scene;

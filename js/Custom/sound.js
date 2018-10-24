@@ -6,7 +6,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function loadSpeach(){
+function loadSpeech(){
 	msg = new SpeechSynthesisUtterance();
 	msg.lang = 'en-US';
 	msg.voiceURI = 'native';
