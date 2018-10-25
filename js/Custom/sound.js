@@ -13,15 +13,25 @@ function loadSpeech(){
 	msg.volume = 1; // 0 to 1
 	msg.rate = 0.85; // 0.1 to 10
 	msg.pitch = 1.45; //0 to 2
-	msg.onend = function(e) {
+	msg.onend = function(event) {
+		console.log(msg);
 		speaking = false;
-  		console.log('Finished in ' + event.elapsedTime + ' seconds.');
+		console.log(speaking);
+		//console.log('Finished in ' + event.elapsedTime + ' seconds.');
 	};
-	window.speechSynthesis.onvoiceschanged = function() {
+	var loadVoices = function() {
 		voices = window.speechSynthesis.getVoices();
 		speak("Hi I am MedicalBot, Nice to meet you");
 	}
-	 setUpSpeechRec();
+	if ((!!window.chrome)==false){
+		loadVoices();
+	}
+	window.speechSynthesis.onvoiceschanged = function() {
+		loadVoices();
+	}
+
+	
+	//setUpSpeechRec();
 }
 
 function loadSound(name,url,meshh){
@@ -37,12 +47,17 @@ function loadSound(name,url,meshh){
 
 
 async function speak(message,voice=10, pitch=1.45){
+	console.log("meh");
+	console.log(speaking);
 	while(speaking){await sleep(100);}
+	console.log("hereee");
 	speaking = true;
 	msg.pitch = pitch;
 	msg.voice = voices[voice]; // Note: some voices don't support altering params, 6 is asian, 9 mediteranian, 10 - british child
 	msg.text = message ;
-	speechSynthesis.speak(msg);
+	console.log("hereeee1");
+	console.log(msg);
+	window.speechSynthesis.speak(msg);
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
 }
