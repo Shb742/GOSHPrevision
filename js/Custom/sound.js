@@ -1,23 +1,17 @@
-var msg;
 var voices;
 var speaking = false;
+var onEnd;
+var msg;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function loadSpeech(){
-	msg = new SpeechSynthesisUtterance();
-	msg.lang = 'en-US';
-	msg.voiceURI = 'native';
-	msg.volume = 1; // 0 to 1
-	msg.rate = 0.85; // 0.1 to 10
-	msg.pitch = 1.45; //0 to 2
-	msg.onend = function(event) {
-		console.log(msg);
+	try {
+	onEnd = function(event) {
 		speaking = false;
-		console.log(speaking);
-		//console.log('Finished in ' + event.elapsedTime + ' seconds.');
+		console.log('Finished in ' + event.elapsedTime + ' seconds.');
 	};
 	var loadVoices = function() {
 		voices = window.speechSynthesis.getVoices();
@@ -30,11 +24,12 @@ function loadSpeech(){
 		loadVoices();
 	}
 
-	
-	//setUpSpeechRec();
+	setUpSpeechRec();
+	} catch(err) { }
 }
 
 function loadSound(name,url,meshh){
+	try{
 	var sound = new BABYLON.Sound(name, url, scene, function () {
 	if (meshh != ""){
 		// Sound will now follow the mesh position
@@ -43,21 +38,25 @@ function loadSound(name,url,meshh){
     //console.log("Sound ready to be played!");
 	}, { loop: false, autoplay: false });
 	return sound;
+	} catch(err) { }
 }
 
 
 async function speak(message,voice=10, pitch=1.45){
-	console.log("meh");
-	console.log(speaking);
+	try{
 	while(speaking){await sleep(100);}
-	console.log("hereee");
 	speaking = true;
+	msg = new SpeechSynthesisUtterance();
+	msg.lang = 'en-US';
+	msg.voiceURI = 'native';
+	msg.volume = 1; // 0 to 1
+	msg.rate = 0.85; // 0.1 to 10
 	msg.pitch = pitch;
+	msg.onend = onEnd;
 	msg.voice = voices[voice]; // Note: some voices don't support altering params, 6 is asian, 9 mediteranian, 10 - british child
 	msg.text = message ;
-	console.log("hereeee1");
-	console.log(msg);
 	window.speechSynthesis.speak(msg);
+	} catch(err) { }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
 }
@@ -74,10 +73,8 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 
-
-
-
 function setUpSpeechRec(continuous=false,words=[]){
+	try{
 	recognition = new SpeechRecognition();
 	//Takes a word list if one is supplied
 	if (words.length > 0){
@@ -98,22 +95,6 @@ function setUpSpeechRec(continuous=false,words=[]){
 		console.log('Confidence: ' + event.results[0][0].confidence);
 		recognition.stop();
 	}
-
-
+	} catch(err) { }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
