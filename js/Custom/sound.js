@@ -59,6 +59,9 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 
+
+
+
 function setUpSpeechRec(continuous=false,words=[]){
 	recognition = new SpeechRecognition();
 	//Takes a word list if one is supplied
@@ -72,6 +75,30 @@ function setUpSpeechRec(continuous=false,words=[]){
 	recognition.lang = 'en-US';
 	recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
 	recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
+	//recognition.start();
+	recognition.onresult = function(event) {
+		var last = event.results.length - 1;
+		var color = event.results[last][0].transcript;
+		console.log(color);
+		console.log('Confidence: ' + event.results[0][0].confidence);
+		recognition.stop();
+	}
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
