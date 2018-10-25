@@ -21,7 +21,7 @@ function loadSpeech(){
 		voices = window.speechSynthesis.getVoices();
 		speak("Hi I am MedicalBot, Nice to meet you");
 	}
-	
+	 setUpSpeechRec();
 }
 
 function loadSound(name,url,meshh){
@@ -43,6 +43,35 @@ async function speak(message,voice=10, pitch=1.45){
 	msg.voice = voices[voice]; // Note: some voices don't support altering params, 6 is asian, 9 mediteranian, 10 - british child
 	msg.text = message ;
 	speechSynthesis.speak(msg);
-	/*var msg = new SpeechSynthesisUtterance('Hello World');
+	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
 }
+
+
+
+
+//Speech recognition
+
+var recognition;
+var speechRecognitionList
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+
+function setUpSpeechRec(continuous=false,words=[]){
+	recognition = new SpeechRecognition();
+	//Takes a word list if one is supplied
+	if (words.length > 0){
+		speechRecognitionList = new SpeechGrammarList();
+		var grammar = '#JSGF V1.0; grammar colors; public <words> = ' + words.join(' | ') + ' ;'
+		speechRecognitionList.addFromString(grammar, 1);
+		recognition.grammars = speechRecognitionList;
+	}
+	//Takes a word list if one is supplied*
+	recognition.lang = 'en-US';
+	recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
+	recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
+
+}
+

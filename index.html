@@ -111,7 +111,7 @@
             var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2.4, 15, new BABYLON.Vector3(0, 1, 0), scene);
             camera.attachControl(canvas, true);
             camera.lowerRadiusLimit = 10;
-            camera.upperRadiusLimit = 30;
+            camera.upperRadiusLimit = 50;
             camera.wheelDeltaPercentage = 0.01;
         
         	var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);

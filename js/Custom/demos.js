@@ -13,7 +13,7 @@ function demo1(inp){
 		speak("idling");
 	}else if (inp == "walk"){
 		speak("I don't seem to understand what you're saying?")
-	}else if ("run"){
+	}else if (inp == "run"){
 		demo11.play();
 	}else{
 		speak(inp);
