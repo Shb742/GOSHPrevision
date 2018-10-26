@@ -15,7 +15,7 @@ function loadSpeech(){
 	};
 	var loadVoices = function() {
 		voices = window.speechSynthesis.getVoices();
-		speak("Hi I am MedicalBot, Nice to meet you");
+		speak("Hi I am MedicalBot, Nice to meet you!");
 	}
 	if ((!!window.chrome)==false){
 		loadVoices();
@@ -42,7 +42,7 @@ function loadSound(name,url,meshh){
 }
 
 
-async function speak(message,voice=10, pitch=1.45){
+async function speak(message,voice=10, pitch=1.45, rate=0.9){
 	try{
 	while(speaking){await sleep(100);}
 	speaking = true;
@@ -50,10 +50,10 @@ async function speak(message,voice=10, pitch=1.45){
 	msg.lang = 'en-US';
 	msg.voiceURI = 'native';
 	msg.volume = 1; // 0 to 1
-	msg.rate = 0.85; // 0.1 to 10
+	msg.rate = rate; // 0.1 to 10
 	msg.pitch = pitch;
 	msg.onend = onEnd;
-	msg.voice = voices[voice]; // Note: some voices don't support altering params, 6 is asian, 9 mediteranian, 10 - british child
+	msg.voice = voices[voice]; // 6 is asian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
 	msg.text = message ;
 	window.speechSynthesis.speak(msg);
 	} catch(err) { }

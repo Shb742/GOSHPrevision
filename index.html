@@ -73,10 +73,10 @@
         }
         registerFullScreen();
         function goFullScreen(){
-                body.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                body.mozRequestFullScreen();
-                body.msRequestFullscreen();
-                body.requestFullscreen(); // standard*/
+            try{body.requestFullscreen();}catch(err){}// standard
+            try{body.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);} catch(err) { }
+            try{body.mozRequestFullScreen();}catch(err){}
+            try{body.msRequestFullscreen();}catch(err){}
             
         }
         //UI
