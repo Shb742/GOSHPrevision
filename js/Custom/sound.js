@@ -95,6 +95,6 @@ function setUpSpeechRec(continuous=false,words=[]){
 		console.log('Confidence: ' + event.results[0][0].confidence);
 		recognition.stop();
 	}
-	} catch(err) { }
+	} catch(err) {console.log(err);}
 }
 
