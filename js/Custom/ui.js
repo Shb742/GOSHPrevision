@@ -7,69 +7,47 @@ function setUpUI(){
     UiPanel.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
     advancedTexture.addControl(UiPanel);
     // ..
-    var button = BABYLON.GUI.Button.CreateSimpleButton("but1", "Play Idle");
+    var button = BABYLON.GUI.Button.CreateSimpleButton("but1", "Demo 1");
     button.paddingTop = "10px";
     button.width = "100px";
     button.height = "50px";
     button.color = "white";
     button.background = "green";
     button.onPointerDownObservable.add(()=> {
-        demo1("idle");
+        demo1();
     });
     UiPanel.addControl(button);
     // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Play Walk");
+    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Demo 2");
     button1.paddingTop = "10px";
     button1.width = "100px";
     button1.height = "50px";
     button1.color = "white";
     button1.background = "green";
     button1.onPointerDownObservable.add(()=> {
-        demo1("walk");
+        demo2();
     });
     UiPanel.addControl(button1);
     // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but3", "Play Run");
+    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but3", "Demo 3");
     button1.paddingTop = "10px";
     button1.width = "100px";
     button1.height = "50px";
     button1.color = "white";
     button1.background = "green";
     button1.onPointerDownObservable.add(()=> {
-        demo1("run");
+        demo3();
     });
     UiPanel.addControl(button1);
     // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but4", "Play Left");
+    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but4", "Live Demo");
     button1.paddingTop = "10px";
     button1.width = "100px";
     button1.height = "50px";
     button1.color = "white";
     button1.background = "green";
     button1.onPointerDownObservable.add(()=> {
-        demo1("left");
-    });
-    UiPanel.addControl(button1);
-    // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but5", "Play Right");
-    button1.paddingTop = "10px";
-    button1.width = "100px";
-    button1.height = "50px";
-    button1.color = "white";
-    button1.background = "green";
-    button1.onPointerDownObservable.add(()=> {
-        demo1("right");
-    });
-    UiPanel.addControl(button1);
-    // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but6", "Play Blend");
-    button1.paddingTop = "10px";
-    button1.width = "100px";
-    button1.height = "50px";
-    button1.color = "white";
-    button1.background = "green";
-    button1.onPointerDownObservable.add(()=> {
-        demo1("blend left and walk");
+        liveDemo();
     });
     UiPanel.addControl(button1);
 }

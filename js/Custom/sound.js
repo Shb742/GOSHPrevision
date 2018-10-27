@@ -1,5 +1,6 @@
 var voices;
 var speaking = false;
+var speechQue = [];
 var onEnd;
 var msg;
 
@@ -15,7 +16,7 @@ function loadSpeech(){
 	};
 	var loadVoices = function() {
 		voices = window.speechSynthesis.getVoices();
-		speak("Hi I am MedicalBot, Nice to meet you!");
+		speak("Hi I am MedicalBot, nice to meet you!",0,1,1);
 	}
 	if ((!!window.chrome)==false){
 		loadVoices();
@@ -42,20 +43,23 @@ function loadSound(name,url,meshh){
 }
 
 
-async function speak(message,voice=10, pitch=1.45, rate=0.9){
+async function speak(message,voice=10, pitch=1.45, rate=0.85){
 	try{
-	while(speaking){await sleep(100);}
-	speaking = true;
-	msg = new SpeechSynthesisUtterance();
-	msg.lang = 'en-US';
-	msg.voiceURI = 'native';
-	msg.volume = 1; // 0 to 1
-	msg.rate = rate; // 0.1 to 10
-	msg.pitch = pitch;
-	msg.onend = onEnd;
-	msg.voice = voices[voice]; // 6 is asian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
-	msg.text = message ;
-	window.speechSynthesis.speak(msg);
+
+		speechQue.push(message);
+		while(speaking || (speechQue.indexOf(message) != 0) ){await sleep(100);}
+		speaking = true;
+		speechQue.shift();//deque
+		msg = new SpeechSynthesisUtterance();
+		msg.lang = 'en-US';
+		msg.voiceURI = 'native';
+		msg.volume = 1; // 0 to 1
+		msg.rate = rate; // 0.1 to 10
+		msg.pitch = pitch;
+		msg.onend = onEnd;
+		msg.voice = voices[voice]; // 6 is indonesian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
+		msg.text = message ;
+		window.speechSynthesis.speak(msg);
 	} catch(err) { }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
