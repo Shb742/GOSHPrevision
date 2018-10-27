@@ -59,6 +59,11 @@ async function speak(message,voice=10, pitch=1.45, rate=0.85){
 		msg.onend = onEnd;
 		msg.voice = voices[voice]; // 6 is indonesian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
 		msg.text = message ;
+		//robot's subtitles
+		if (voice != 7){
+			updateSubtitles(message);
+		}
+		//robot's subtitles*
 		window.speechSynthesis.speak(msg);
 	} catch(err) { }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
@@ -94,8 +99,8 @@ function setUpSpeechRec(continuous=false,words=[]){
 		//recognition.start();
 		recognition.onresult = function(event) {
 			var last = event.results.length - 1;
-			var color = event.results[last][0].transcript;
-			console.log(color);
+			var result = event.results[last][0].transcript;
+			console.log(result);
 			console.log('Confidence: ' + event.results[0][0].confidence);
 			recognition.stop();
 		}

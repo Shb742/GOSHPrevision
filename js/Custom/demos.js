@@ -39,8 +39,12 @@ function demo3(){
 	
 }
 
-function liveDemo(){
+async function liveDemo(){
 	if (speaking){
 		return ;
 	}
+	speak("I am going to pretend to be a 5 year old child who you have just diagnosed with asthma.",0,1,1);
+	speak("Please explain to me what asthma is ?",10);
+	while(speaking){await sleep(100);}
+	recognition.start();
 }
