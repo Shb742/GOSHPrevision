@@ -1,6 +1,8 @@
+//http://playground.babylonjs.com/#HSVQL
+//http://www.html5gamedevs.com/topic/10917-2d-text-on-screen/
 var textDiv;
 
-function setUpSubtitle(){
+function setUpSubtitles(){
     textDiv = document.createElement("div"); 
     var textNode = document.createTextNode(""); 
     textDiv.appendChild(textNode);
@@ -16,6 +18,6 @@ function setUpSubtitle(){
     document.body.appendChild(textDiv);
 }
 
-function updateSubtitle(textStr) {
+function updateSubtitles(textStr) {
     textDiv.textContent = textStr;
 }

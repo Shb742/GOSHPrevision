@@ -56,7 +56,6 @@ async function speak(message,voice=10, pitch=1.45, rate=0.9){
 	msg.voice = voices[voice]; // 6 is asian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
 	msg.text = message ;
 	window.speechSynthesis.speak(msg);
-	updateSubtitle(message);
 	} catch(err) { }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
@@ -65,10 +64,10 @@ async function speak(message,voice=10, pitch=1.45, rate=0.9){
 
 
 
-//Speech recognition
+//Speech recognition - only works on Chrome
 
 var recognition;
-var speechRecognitionList
+var speechRecognitionList;
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -76,26 +75,26 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 
 function setUpSpeechRec(continuous=false,words=[]){
 	try{
-	recognition = new SpeechRecognition();
-	//Takes a word list if one is supplied
-	if (words.length > 0){
-		speechRecognitionList = new SpeechGrammarList();
-		var grammar = '#JSGF V1.0; grammar colors; public <words> = ' + words.join(' | ') + ' ;'
-		speechRecognitionList.addFromString(grammar, 1);
-		recognition.grammars = speechRecognitionList;
-	}
-	//Takes a word list if one is supplied*
-	recognition.lang = 'en-US';
-	recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
-	recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
-	//recognition.start();
-	recognition.onresult = function(event) {
-		var last = event.results.length - 1;
-		var color = event.results[last][0].transcript;
-		console.log(color);
-		console.log('Confidence: ' + event.results[0][0].confidence);
-		recognition.stop();
-	}
+		recognition = new SpeechRecognition();
+		//Takes a word list if one is supplied
+		if (words.length > 0){
+			speechRecognitionList = new SpeechGrammarList();
+			var grammar = '#JSGF V1.0; grammar colors; public <words> = ' + words.join(' | ') + ' ;'
+			speechRecognitionList.addFromString(grammar, 1);
+			recognition.grammars = speechRecognitionList;
+		}
+		//Takes a word list if one is supplied*
+		recognition.lang = 'en-US';
+		recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
+		recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
+		//recognition.start();
+		recognition.onresult = function(event) {
+			var last = event.results.length - 1;
+			var color = event.results[last][0].transcript;
+			console.log(color);
+			console.log('Confidence: ' + event.results[0][0].confidence);
+			recognition.stop();
+		}
 	} catch(err) {console.log(err);}
 }
 
