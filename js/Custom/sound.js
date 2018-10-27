@@ -56,6 +56,7 @@ async function speak(message,voice=10, pitch=1.45, rate=0.9){
 	msg.voice = voices[voice]; // 6 is asian, 9 mediteranian/Dutch, 10 - Bot, 7 - Doctor*
 	msg.text = message ;
 	window.speechSynthesis.speak(msg);
+	updateSubtitle(message);
 	} catch(err) { }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
