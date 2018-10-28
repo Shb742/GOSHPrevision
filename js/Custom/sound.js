@@ -99,6 +99,12 @@ function setUpSpeechRec(continuous=false,words=[]){
 		recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
 		recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
 		
+		recognition.onerror = function(event) {
+		    console.log(event.error);
+		};
+
+
+
 		//mic active animation
 		mic_active = document.getElementById("mic");
 		mic_active.style = "opacity:0.5;animation: none;";

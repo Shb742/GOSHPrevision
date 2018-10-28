@@ -14,7 +14,7 @@ function testForSubstring(substrings, result){
 	       matches +=1;
 	   }
 	}
-	return matches*3;
+	return matches*5;
 }
 
 function demo1(){
@@ -64,10 +64,10 @@ async function liveDemo(){
 	}
 	recognizing = false;
 	var state = 0;
-	var points = 40;
+	var points = 30;
 	var BadList = ["condition","patient","disease","death","die","inflam","symptoms","airways","long term","long-term","biotic","steroid","histamine","irritant","nebulizer",
-	"puffer"];
-	var GoodList = ["difficult","uneasy","don't worry","calm down", "dont worry", "dont be afraid","good","better","happy","alright","ok","thing","hard"];
+	"puffer", "managed"];
+	var GoodList = ["difficult","uneasy","don't worry","calm down", "dont worry", "dont be afraid","good","better","happy","alright","ok","thing","hard","breathe", "care of"];
 	recognition.onresult = function(event) {
 		var last = event.results.length - 1;
 		var result = event.results[last][0].transcript;
@@ -77,15 +77,31 @@ async function liveDemo(){
 		recognition.stop();
 		mic_active.style = "opacity:0.5;animation: none;";
 		recognizing = false;
+		points += testForSubstring(GoodList,result);
+		points -= testForSubstring(BadList,result);
 		if (state == 0){
 			if (result.includes("asthma is")){
 				points += 10;
 			}
-			points += testForSubstring(GoodList,result);
-			points -= testForSubstring(BadList,result);
-		}else{
-			points += testForSubstring(GoodList,result);
-			points -= testForSubstring(BadList,result);
+			if (result.includes("hard to breathe") || result.includes("difficult to breathe")) {
+				points += 5;
+			}
+		}
+		if (state == 1){
+			if (result.includes("has medicine")){
+				points += 5;
+			}
+			if (result.includes("helps you breathe")){
+				points += 5;
+			}
+		}
+		if (state == 2){
+			if (result.includes("hard to breathe") || result.includes("difficult to breathe")) {
+				points += 5;
+			}
+			if (result.includes("you will be")){
+				points += 2;
+			}
 		}
 		console.log(points);
 		state +=1;
@@ -102,6 +118,6 @@ async function liveDemo(){
 	speak("When should I use it ?",10);
 	while(speaking){await sleep(100);}//wait for speach to finish
 	await listen();
-	speak("Thank you for completing the exercise with me. You achieved a score of "+parseInt(Math.round(points/10))+" out of 10",0,1,1);
+	speak("Thank you for completing the exercise with me. You achieved a score of "+Math.min(parseInt(Math.round(points/10)),10)+" out of 10",0,1,1);
 
 }

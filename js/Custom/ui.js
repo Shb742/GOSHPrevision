@@ -51,3 +51,10 @@ function setUpUI(){
     });
     UiPanel.addControl(button1);
 }
+
+var KeyUp = function (evt){
+    if (evt.keyCode == 27) {
+        speechQue = [];
+    }//Escape key
+}
+document.addEventListener("keyup", KeyUp);
