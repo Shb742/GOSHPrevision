@@ -27,6 +27,9 @@
          <script src="js/custom/ui.js"></script>
           <script src="js/custom/subtitles.js"></script>
 
+          <!--Custom css-->
+          <link rel="stylesheet" href="css/mic_active.css">
+
 
         <style>
             html, body {
@@ -47,6 +50,7 @@
 <body id="body">
     <img style="display:block;position:absolute;width:30px;height:30px;top:10px;left:10px;" id="FullScreenButton" src = "assets/FS.png" onclick="goFullScreen();" />
     <span id = "fpsLabel" style="position: absolute;right: 20px;top: 20px;color: #999;cursor: default;">0 fps</span>
+    <span id="mic"  class="pulse" style="opacity:1;"><br><p>Mic</p></span>
     <canvas id="renderCanvas"></canvas>
     
     <script>

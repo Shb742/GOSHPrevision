@@ -3,6 +3,7 @@ var speaking = false;
 var speechQue = [];
 var onEnd;
 var msg;
+var mic_active;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,6 +27,7 @@ function loadSpeech(){
 	}
 
 	setUpSpeechRec();
+
 	} catch(err) { }
 }
 
@@ -96,14 +98,18 @@ function setUpSpeechRec(continuous=false,words=[]){
 		recognition.lang = 'en-US';
 		recognition.interimResults = false;//Defines whether the speech recognition system should return interim results, or just final results.
 		recognition.maxAlternatives = 1;//Sets the number of alternative potential matches that should be returned per result. This can sometimes be useful, say if a result is not completely clear and you want to display a list if alternatives for the user to choose the correct one from.	recognition.continuous = continuous;
-		//recognition.start();
+		
+		//mic active animation
+		mic_active = document.getElementById("mic");
+		mic_active.style = "opacity:0.5;animation: none;";
+		/*recognition.start();
 		recognition.onresult = function(event) {
 			var last = event.results.length - 1;
 			var result = event.results[last][0].transcript;
 			console.log(result);
 			console.log('Confidence: ' + event.results[0][0].confidence);
 			recognition.stop();
-		}
+		}*/
 	} catch(err) {console.log(err);}
 }
 
