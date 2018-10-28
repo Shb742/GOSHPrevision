@@ -29,7 +29,7 @@ function setUpUI(){
     });
     UiPanel.addControl(button1);
     // ..
-    var button1 = BABYLON.GUI.Button.CreateSimpleButton("but3", "Demo 3");
+   /* var button1 = BABYLON.GUI.Button.CreateSimpleButton("but3", "Demo 3");
     button1.paddingTop = "10px";
     button1.width = "100px";
     button1.height = "50px";
@@ -38,7 +38,7 @@ function setUpUI(){
     button1.onPointerDownObservable.add(()=> {
         demo3();
     });
-    UiPanel.addControl(button1);
+    UiPanel.addControl(button1);*/
     // ..
     var button1 = BABYLON.GUI.Button.CreateSimpleButton("but4", "Live Demo");
     button1.paddingTop = "10px";
