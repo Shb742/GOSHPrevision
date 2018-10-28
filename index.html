@@ -25,7 +25,8 @@
          <script src="js/custom/sound.js"></script>
          <script src="js/custom/demos.js"></script>
          <script src="js/custom/ui.js"></script>
-          <script src="js/custom/subtitles.js"></script>
+        <script src="js/custom/subtitles.js"></script>
+        <script src="js/custom/animation.js"></script>
 
           <!--Custom css-->
           <link rel="stylesheet" href="css/mic_active.css">
@@ -102,7 +103,7 @@
         }
 
         function setUpRobot(){
-            robotMesh.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+            //robotMesh.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
             robotMesh.position = new BABYLON.Vector3(0, 1, 0);
             //robotMesh.scaling = new BABYLON.Vector3(1,1,1);
 
@@ -136,7 +137,7 @@
             engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
             //The robot model was obtained from Robin Butler via sketchfab, under the CC attribution licence
-        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "animated.babylon", scene, function (newMeshes, particleSystems, skeleton) {
+        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "animatednew.babylon", scene, function (newMeshes, particleSystems, skeleton) {
                 if (skeleton.length > 0){
                     robotSkeleton = skeleton[0];
                     setUpRobotSkeleton();
@@ -161,6 +162,7 @@
                 loadSpeech();
                 setUpDemos();
                 setUpUI();
+                setUpAnimations();
                 engine.hideLoadingUI();
             });
             return scene;
