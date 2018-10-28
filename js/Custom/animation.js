@@ -1,11 +1,11 @@
-/*
-                var idleRange = robotSkeleton.getAnimationRange("YBot_Idle");
-                var walkRange = robotSkeleton.getAnimationRange("YBot_Walk");
-                var runRange = robotSkeleton.getAnimationRange("YBot_Run");
-                var leftRange = robotSkeleton.getAnimationRange("YBot_LeftStrafeWalk");
-                var rightRange = robotSkeleton.getAnimationRange("YBot_RightStrafeWalk");
-                
-                // IDLE
+
+                var idleRange = robotSkeleton.getAnimationRange("NoAction");
+                var walkRange = robotSkeleton.getAnimationRange("yesAction");
+                var runRange = robotSkeleton.getAnimationRange("sideways");
+                //var leftRange = robotSkeleton.getAnimationRange("YBot_LeftStrafeWalk");
+                //var rightRange = robotSkeleton.getAnimationRange("YBot_RightStrafeWalk");
+                //scene.animationTimeScale += 0.1;
+                /*// IDLE
                 if (idleRange) scene.beginAnimation(robotSkeleton, idleRange.from, idleRange.to, true);
         		       
                 // UI

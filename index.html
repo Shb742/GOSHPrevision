@@ -132,7 +132,7 @@
             engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
             //The robot model was obtained from Robin Butler via sketchfab, under the CC attribution licence
-        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "robot.babylon", scene, function (newMeshes, particleSystems, skeleton) {
+        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "animated.babylon", scene, function (newMeshes, particleSystems, skeleton) {
                 if (skeleton.length > 0){
                     robotSkeleton = skeleton[0];
                     setUpRobotSkeleton();
