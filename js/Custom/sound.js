@@ -12,7 +12,9 @@ function sleep(ms) {
 function loadSpeech(){
 	try {
 	onEnd = function(event) {
+
 		speaking = false;
+		timeToFadeOut(curTextDiv);
 		console.log('Finished in ' + event.elapsedTime + ' seconds.');
 	};
 	var loadVoices = function() {
@@ -63,7 +65,9 @@ async function speak(message,voice=10, pitch=1.45, rate=0.85){
 		msg.text = message ;
 		//robot's subtitles
 		if (voice != 7){
-			updateSubtitles(message);
+			updateSubtitles(1, message);
+		} else {
+			updateSubtitles(2, message);
 		}
 		//robot's subtitles*
 		window.speechSynthesis.speak(msg);
