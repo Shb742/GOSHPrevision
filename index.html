@@ -176,6 +176,9 @@
             if (scene) {
                 scene.render();
                 fpsLabel.innerHTML = engine.getFps().toFixed()+" fps";//FrameRate + " fps";
+                /*if (idling && (Math.random() >= 0.999)) {
+                    scene.beginWeightedAnimation(robotMesh, twistAnim.from, twistAnim.to, 1, false);
+                }*/
             }
         });
 

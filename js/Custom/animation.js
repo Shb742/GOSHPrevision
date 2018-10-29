@@ -6,6 +6,7 @@ var noAnim;
 var yesAnim;
 var twirlAnim;
 var twistAnim;
+var idling = true;
 function setUpAnimations(){
     idleAnim = robotMesh.getAnimationRange("idle");
     idleTwirlAnim = robotMesh.getAnimationRange("idlespinY");
@@ -17,7 +18,8 @@ function setUpAnimations(){
     twistAnim = robotMesh.getAnimationRange("spinZ");
     //scene.animationTimeScale += 0.1;
     // IDLE
-    if (idleAnim) scene.beginAnimation(robotMesh, idleAnim.from, idleAnim.to, true);
+    if (idleAnim) scene.beginWeightedAnimation(robotMesh, idleAnim.from, idleAnim.to, 0.2, true);
+    //if (idleAnim) scene.beginAnimation(robotMesh, idleAnim.from, idleAnim.to, true);
            
     /*// UI
     var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");

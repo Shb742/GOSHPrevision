@@ -58,8 +58,8 @@ function updateSubtitles(type, textStr) {
 }
 
 
-function timeToFadeOut(divElement) {
-    fadeTimeout = setTimeout(function() {fadeOutEffect(divElement)}, 750);
+function timeToFadeOut(divElement, delay=750) {
+    fadeTimeout = setTimeout(function() {fadeOutEffect(divElement)}, delay);
 }
 
 function fadeOutEffect(divElement) {

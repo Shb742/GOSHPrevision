@@ -74,6 +74,8 @@ async function liveDemo(){
 		result = result.toLowerCase();
 		console.log(result);
 		console.log('Confidence: ' + event.results[0][0].confidence);
+		updateSubtitles(2, result);
+		//timeToFadeOut(curTextDiv,1300);
 		recognition.stop();
 		mic_active.style = "opacity:0.5;animation: none;";
 		recognizing = false;
