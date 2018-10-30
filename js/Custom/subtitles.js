@@ -46,11 +46,7 @@ function updateSubtitles(type, textStr) {
     } else {
         divElement = humTextDiv;
     }
-
-    if (curTextDiv == divElement) {
-        clearTimeout(fadeTimeout);
-    }
-
+    
     curTextDiv = divElement;
 
     curTextDiv.style.opacity = 1;

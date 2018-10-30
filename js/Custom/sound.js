@@ -14,7 +14,12 @@ function loadSpeech(){
 	onEnd = function(event) {
 
 		speaking = false;
-		timeToFadeOut(curTextDiv);
+
+		if (curTextDiv == humTextDiv)
+			timeToFadeOut(curTextDiv);
+		if (msg.text.includes("Hi I am MedicalBot, nice to meet you!") || msg.text.includes("You achieved a score of") && msg.voice == voices[0])
+			timeToFadeOut(botTextDiv);
+
 		console.log('Finished in ' + event.elapsedTime + ' seconds.');
 	};
 	var loadVoices = function() {
