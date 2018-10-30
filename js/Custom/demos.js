@@ -126,6 +126,7 @@ async function liveDemo(){
 	while(speaking){await sleep(100);}//wait for speach to finish
 	await listen();
 	points = Math.min(parseInt(Math.round(points/10)),10);
+	console.log(points);
 	speak("Thank you for completing the exercise with me. You achieved a score of "+points+" out of 10",0,1,1);
 
 }
