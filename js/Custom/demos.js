@@ -17,7 +17,7 @@ function testForSubstring(substrings, result){
 	return matches*5;
 }
 
-function demo1(){
+async function demo1(){
 	if (speaking){
 		return ;
 	}
@@ -29,6 +29,7 @@ function demo1(){
 	speak("When should I use it ?",10);
 		speak("You should use it when you find it hard to breathe.",7,1,0.9);
 	speak("Thank you for completing the exercise with me, you did well. You achieved a score of 10 out of 10, I have no further advice for you.",0,1,1);
+
 }
 
 
@@ -75,7 +76,7 @@ async function liveDemo(){
 		console.log(result);
 		console.log('Confidence: ' + event.results[0][0].confidence);
 		updateSubtitles(2, result);
-		//timeToFadeOut(curTextDiv,1300);
+		timeToFadeOut(curTextDiv,1300);
 		recognition.stop();
 		mic_active.style = "opacity:0.5;animation: none;";
 		recognizing = false;
@@ -120,6 +121,7 @@ async function liveDemo(){
 	speak("When should I use it ?",10);
 	while(speaking){await sleep(100);}//wait for speach to finish
 	await listen();
+	points = Math.min(parseInt(Math.round(points/10)),10);
 	speak("Thank you for completing the exercise with me. You achieved a score of "+Math.min(parseInt(Math.round(points/10)),10)+" out of 10",0,1,1);
 
 }

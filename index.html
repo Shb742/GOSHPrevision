@@ -67,6 +67,7 @@
         var scene;
         var robotSkeleton;
         var robotMesh;
+        var robotAnimations;
         //3D*
         //Globals*
 
@@ -92,7 +93,7 @@
             engine.enableOfflineSupport = false;
             // This is really important to tell Babylon.js to use decomposeLerp and matrix interpolation
             BABYLON.Animation.AllowMatricesInterpolation = true;
-            //BABYLON.Animation.AllowMatrixDecomposeForInterpolation = false;
+            BABYLON.Animation.AllowMatrixDecomposeForInterpolation = false;
         }
 
         function setUpRobotSkeleton(){
@@ -103,9 +104,10 @@
         }
 
         function setUpRobot(){
-            //robotMesh.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+            //robotMesh.backFaceCulling = false;
+            robotMesh.rotate(BABYLON.Axis.Y, Math.PI*1.05, BABYLON.Space.WORLD);
             robotMesh.position = new BABYLON.Vector3(0, 1, 0);
-            //robotMesh.scaling = new BABYLON.Vector3(1,1,1);
+            robotMesh.scaling = new BABYLON.Vector3(0.25,0.25,0.25);
 
         }
 
@@ -114,9 +116,9 @@
             setUpEngine();
             var scene = new BABYLON.Scene(engine);
             //Setting up scene
-            var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2.4, 15, new BABYLON.Vector3(0, 1, 0), scene);
+            var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2.4, 25, new BABYLON.Vector3(0, 1, 0), scene);
             camera.attachControl(canvas, true);
-            camera.lowerRadiusLimit = 10;
+            camera.lowerRadiusLimit = 25;
             camera.upperRadiusLimit = 50;
             camera.wheelDeltaPercentage = 0.01;
         
@@ -136,8 +138,10 @@
             engine.loadingScreen.loadingUIText = "Mobilizing MedicalBot...";
             engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
-            //The robot model was obtained from Robin Butler via sketchfab, under the CC attribution licence
-        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "animatednew.babylon", scene, function (newMeshes, particleSystems, skeleton) {
+            //The robot model was obtained from e-toma via sketchfab, under the CC attribution licence https://sketchfab.com/models/37c871cbd9174f67bda4c10d19a97ed0
+        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "newBot.gltf", scene, function (newMeshes, particleSystems, skeleton, animations) {
+                //console.log(animations);
+                robotAnimations = animations;
                 if (skeleton.length > 0){
                     robotSkeleton = skeleton[0];
                     setUpRobotSkeleton();
@@ -152,17 +156,16 @@
                 }
 
                 //Background
-                /*var helper = scene.createDefaultEnvironment({
+                var helper = scene.createDefaultEnvironment({
                     enableGroundShadow: true
                 });
-                helper.setMainColor(BABYLON.Color3.Gray());
-                helper.ground.position.y += 0.01;*/
+                helper.setMainColor(BABYLON.Color3.Black());
+                helper.ground.position.y += 0.01;
                 //Background*
                 setUpSubtitles();
                 loadSpeech();
                 setUpDemos();
                 setUpUI();
-                setUpAnimations();
                 engine.hideLoadingUI();
             });
             return scene;
@@ -176,7 +179,7 @@
             if (scene) {
                 scene.render();
                 fpsLabel.innerHTML = engine.getFps().toFixed()+" fps";//FrameRate + " fps";
-                /*if (idling && (Math.random() >= 0.999)) {
+                /*if (idling && (Math.random() >= 0.995)) {
                     scene.beginWeightedAnimation(robotMesh, twistAnim.from, twistAnim.to, 1, false);
                 }*/
             }
