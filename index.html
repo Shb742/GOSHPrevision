@@ -106,7 +106,7 @@
         function setUpRobot(){
             //robotMesh.backFaceCulling = false;
             robotMesh.rotate(BABYLON.Axis.Y, Math.PI*1.05, BABYLON.Space.WORLD);
-            robotMesh.position = new BABYLON.Vector3(0, 1, 0);
+            robotMesh.position = new BABYLON.Vector3(0, -3.5, 0);
             robotMesh.scaling = new BABYLON.Vector3(0.25,0.25,0.25);
 
         }
@@ -139,7 +139,7 @@
             engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
             //The robot model was obtained from e-toma via sketchfab, under the CC attribution licence https://sketchfab.com/models/37c871cbd9174f67bda4c10d19a97ed0
-        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "newBot.gltf", scene, function (newMeshes, particleSystems, skeleton, animations) {
+        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "newBot2.gltf", scene, function (newMeshes, particleSystems, skeleton, animations) {
                 //console.log(animations);
                 robotAnimations = animations;
                 if (skeleton.length > 0){

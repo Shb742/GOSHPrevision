@@ -6,6 +6,7 @@ function robotIdle(loop=true,speed=1){
 
 function robotCompute(loop=false,speed=1){
     if(robotAnimations){
+        robotAnimations[1]._from=4;
         robotAnimations[1].start(loop,speed);
         animationActive = true;
     }
@@ -13,6 +14,7 @@ function robotCompute(loop=false,speed=1){
 
 function robotError(loop=false,speed=1){
     if(robotAnimations){
+        robotAnimations[2]._from=6;
         robotAnimations[2].start(loop,speed);
         animationActive = true;
     }
@@ -20,6 +22,7 @@ function robotError(loop=false,speed=1){
 
 function robotLove(loop=false,speed=1){
     if(robotAnimations){
+        robotAnimations[3]._from = 8;
         robotAnimations[3].start(loop,speed);
         animationActive = true;
     }
@@ -27,6 +30,7 @@ function robotLove(loop=false,speed=1){
 
 function robotAlert(loop=false,speed=1){
     if(robotAnimations){
+        robotAnimations[4]._from=11;
         robotAnimations[4].start(loop,speed);
         animationActive = true;
     }
@@ -43,4 +47,8 @@ function isAnimationRunning(){//other than idle
         }
     }
     return false;
+}
+
+function runAnimationQue(){
+
 }

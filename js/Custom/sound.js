@@ -127,4 +127,3 @@ function setUpSpeechRec(continuous=false,words=[]){
 		}*/
 	} catch(err) {console.log(err);}
 }
-

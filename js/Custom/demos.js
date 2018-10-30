@@ -3,7 +3,7 @@ var recognizing;
 var audio1;
 //Audio Files*
 function setUpDemos(){
-	audio1 = loadSound("demo1","assets/sample_audio.mp3",robotMesh);
+	//audio1 = loadSound("demo1","assets/sample_audio.mp3",robotMesh);
 }
 
 function testForSubstring(substrings, result){
