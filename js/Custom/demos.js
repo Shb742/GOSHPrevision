@@ -14,7 +14,7 @@ function testForSubstring(substrings, result){
 	       matches +=1;
 	   }
 	}
-	return matches*5;
+	return matches*4;
 }
 
 async function demo1(){
@@ -56,7 +56,11 @@ async function listen(){
 	recognition.start();
 	recognizing = true;
 	mic_active.style = "opacity:1;";
+	stopCurrentAnimation();
+	robotCompute(true);
 	while(recognizing){await sleep(100);}//wait for speaker to finish
+	stopCurrentAnimation();
+	robotIdle(true);
 }
 
 async function liveDemo(){

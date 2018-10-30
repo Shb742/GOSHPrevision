@@ -14,11 +14,14 @@ function loadSpeech(){
 	onEnd = function(event) {
 
 		speaking = false;
-
-		if (curTextDiv == humTextDiv)
+		stopCurrentAnimation();
+		robotIdle(true);
+		if (curTextDiv == humTextDiv){
 			timeToFadeOut(curTextDiv);
-		if (msg.text.includes("Hi I am MedicalBot") || msg.text.includes("You achieved a score of") && msg.voice == voices[0])
+		}
+		if (msg.text.includes("Hi I am MedicalBot") || msg.text.includes("You achieved a score of") && msg.voice == voices[0]){
 			timeToFadeOut(botTextDiv);
+		}
 
 		console.log('Finished in ' + event.elapsedTime + ' seconds.');
 	};
@@ -50,7 +53,7 @@ function loadSound(name,url,meshh){
 	return sound;
 	} catch(err) { }
 }
-
+//parseInt(i.substr(i.indexOf("out of 10")-3,2).replace( /^\D+/g, ''));
 
 async function speak(message,voice=10, pitch=1.45, rate=0.85){
 	try{
@@ -71,12 +74,28 @@ async function speak(message,voice=10, pitch=1.45, rate=0.85){
 		//robot's subtitles
 		if (voice != 7){
 			updateSubtitles(1, message);
+			if (message.includes("?")){
+				stopCurrentAnimation();
+				robotAlert();
+			}
+			if (message.includes("out of 10")){
+				var score = parseInt(message.substr(message.indexOf("out of 10")-3,2));
+				if (score<5){
+					stopCurrentAnimation();
+					robotError(true);
+				}else{
+					stopCurrentAnimation();
+					robotLove(true);
+				}
+			}
 		} else {
 			updateSubtitles(2, message);
+			stopCurrentAnimation();
+			robotCompute(true);
 		}
 		//robot's subtitles*
 		window.speechSynthesis.speak(msg);
-	} catch(err) { }
+	} catch(err) {console.log(err); }
 	/*Simplest example - var msg = new SpeechSynthesisUtterance('Hello World');
 	window.speechSynthesis.speak(msg);*/
 }

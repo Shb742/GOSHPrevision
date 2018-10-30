@@ -49,6 +49,10 @@ function isAnimationRunning(){//other than idle
     return false;
 }
 
-function runAnimationQue(){
-
+function stopCurrentAnimation(){
+    for (var i in robotAnimations){
+        if (robotAnimations[i].isStarted){
+            robotAnimations[i].stop();
+        }
+    }
 }
