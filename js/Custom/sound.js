@@ -19,7 +19,7 @@ function loadSpeech(){
 	};
 	var loadVoices = function() {
 		voices = window.speechSynthesis.getVoices();
-		speak("Hi I am MedicalBot, nice to meet you!",0,1,1);
+		speak("Hi I am MedicalBot, it's nice to meet you!",0,1,1);
 	}
 	if ((!!window.chrome)==false){
 		loadVoices();
