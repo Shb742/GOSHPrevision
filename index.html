@@ -53,7 +53,7 @@
     <span id = "fpsLabel" style="position: absolute;right: 20px;top: 20px;color: #999;cursor: default;">0 fps</span>
     <span id="mic"  class="pulse" style="opacity:1;"><br><p>Mic</p></span>
     <canvas id="renderCanvas"></canvas>
-    
+    <img style="display:block;position:absolute;width:100px;height:100px;bottom:20px;left:20px;" id="drive" src = "assets/logo.png"/>
     <script>
         //Globals
         //UI
@@ -139,7 +139,7 @@
             engine.loadingScreen.loadingUIBackgroundColor = "black"; //or any other CSS conform color
             engine.displayLoadingUI();
             //The robot model was obtained from e-toma via sketchfab, under the CC attribution licence https://sketchfab.com/models/37c871cbd9174f67bda4c10d19a97ed0
-        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "newBot2.gltf", scene, function (newMeshes, particleSystems, skeleton, animations) {
+        	BABYLON.SceneLoader.ImportMesh("", "./assets/", "robot.gltf", scene, function (newMeshes, particleSystems, skeleton, animations) {
                 //console.log(animations);
                 robotAnimations = animations;
                 if (skeleton.length > 0){

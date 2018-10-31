@@ -55,7 +55,7 @@ function loadSound(name,url,meshh){
 }
 //parseInt(i.substr(i.indexOf("out of 10")-3,2).replace( /^\D+/g, ''));
 
-async function speak(message,voice=10, pitch=1.45, rate=0.85){
+async function speak(message,voice=10, pitch=1.45, rate=0.80){
 	try{
 
 		speechQue.push(message);
